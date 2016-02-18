@@ -1,0 +1,26 @@
+---
+- name: config_bfd | downloading bfd (Brute-Force-Detection)
+  get_url:
+    url: "{{ apf_firewall_bfd_url }}/{{ apf_firewall_bfd_file }}"
+    dest: "/opt/{{ apf_firewall_bfd_file }}"
+
+- name: config_bfd | extracting bfd (Brute-Force-Detection)
+  unarchive:
+    src: "/opt/{{ apf_firewall_bfd_file }}"
+    dest: "/opt/"
+    copy: no
+    creates: "/opt/bfd-1.5-2/install.sh"
+
+- name: config_bfd | installing bfd (Brute-Force-Detection)
+  command: './install.sh'
+  args:
+    chdir: "/opt/bfd-1.5-2"
+    creates: "/usr/local/bfd/bfd"
+
+- name: config_bfd | configuring bfd (Brute-Force-Detection)
+  template:
+    src: "usr/local/bfd/conf.bfd.j2"
+    dest: "/usr/local/bfd/conf.bfd"
+    owner: root
+    group: root
+    mode: 0640

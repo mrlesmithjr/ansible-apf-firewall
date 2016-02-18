@@ -1,0 +1,11 @@
+---
+- name: config_apf | configuring apf firewall
+  template:
+    src: "etc/apf-firewall/conf.apf.j2"
+    dest: "/etc/apf-firewall/conf.apf"
+    owner: root
+    group: root
+    mode: 0755
+  notify:
+    - restart apf-firewall
+    - reload apf-firewall rules
