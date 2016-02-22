@@ -7,7 +7,7 @@
 # you're doing.
 Vagrant.configure(2) do |config|
   config.vm.define "apf" do |apf|
-    apf.vm.box = "ubuntu/trusty64"
+    apf.vm.box = "mrlesmithjr/trusty64"
     apf.vm.hostname = "apf"
 
 #    apf.vm.network :private_network, ip: "192.168.202.201"
