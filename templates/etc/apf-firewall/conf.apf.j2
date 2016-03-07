@@ -24,7 +24,11 @@ DEVEL_MODE="0"
 {% endif %}
 
 # The installation path of APF; this can be changed but it is not recommended.
+{% if ansible_os_family != "RedHat" %}
 INSTALL_PATH="{{ apf_firewall_install_path }}"
+{% elif ansible_os_family == "RedHat" %}
+INSTALL_PATH="{{ apf_firewall_redhat_install_path }}"
+{% endif %}
 
 # Untrusted Network interface(s); all traffic on defined interface will be
 # subject to all firewall rules. This should be your internet exposed
