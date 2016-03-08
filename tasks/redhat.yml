@@ -12,6 +12,7 @@
     name: "{{ item }}"
     state: present
   with_items:
+    - libselinux-python
     - net-tools
   when: ansible_distribution == "Fedora"
 
